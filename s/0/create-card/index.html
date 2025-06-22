@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../dist/css/style.css">
+    <link rel="stylesheet" href="../../../dist/css/ms-css.css">
+    <link rel="stylesheet" href="../../../dist/css/form-component.css">
+    <title>ecuapay</title>
+    <style>div.form{width: 20rem; }</style>
+</head>
+<body class="bg-color">   
+    <!-- MENU-Header -->
+    <div class="d-flex justify-content-center">
+        <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../">Cards</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../create-transaction/">Create Transaction</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Create Card</a>
+            </li>
+
+          </ul>
+    </div>
+    <!-- Formulario -->
+    <div>
+         <!-- FOMR-1: Personal Data -->
+        <p class="text-center text-light">Personal Data</p>    
+        <div class="d-flex justify-content-center mb-5">
+            <div>
+                <!-- Nombre -->
+                <div class="form">           
+                    <input class="input client-name" placeholder="Name" required="" type="text">
+                    <span class="input-border"></span>            
+                </div>
+
+            <!-- Apellidos -->
+                <div class="form">           
+                    <input class="input client-surname" placeholder="Surname" required="" type="text">
+                    <span class="input-border"></span>          
+                </div>
+
+            <!-- Correo -->
+                <div class="form">           
+                    <input class="input client-email" placeholder="Email" required="" type="email">
+                <span class="input-border"></span>         
+                </div>
+
+            <!-- Fecha de nacimiento -->
+                <div class="form">           
+                    <input class="input client-born-day" placeholder="Day of Birth (DD-MM-YYYY)" required="" type="date">
+                    <span class="input-border"></span>         
+                </div>
+
+                <!-- Numero de Telefono -->
+                <div class="form">           
+                    <input class="input client-phone-number" placeholder="Phone Number (Orange)" required="" type="text">
+                    <span class="input-border"></span>        
+                </div>
+                <!-- Sexo -->
+                <div class="form-check mt-2">
+                    <input class="form-check-input client-sex-male" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                    Male
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input client-sex-female" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                    Female
+                    </label>
+                </div>
+                <div class="form personal-data-msg warning-inputs-personal-data"> 
+                    <span class="text-warning"></span>                   
+                </div>                
+            </div>  
+                 
+        </div>
+
+        <!-- FOMR-2: Address Data -->
+        <p class="text-center text-light">Address Data</p>    
+        <div class="d-flex justify-content-center mb-4">
+            <div>
+                <!-- Direccion -->
+                <div class="form">                
+                    <input class="input address-direction" placeholder="Address" required="" type="text">
+                    <span class="input-border"></span>               
+                </div>
+
+                <!-- Codigo Postal -->
+                <div class="form">                
+                    <input class="input address-postal-code" placeholder="Postal Code" required="" type="number">
+                    <span class="input-border"></span>             
+                </div>
+
+                <!-- Ciudad -->
+                <div class="form">                
+                    <input class="input address-city" placeholder="City" required="" type="text">
+                    <span class="input-border"></span>              
+                </div>
+
+                <!-- Pais -->
+                <div class="form">                
+                    <input class="input address-country" placeholder="Country" required="" type="text">
+                    <span class="input-border"></span>           
+                </div>                
+                <div class="form address-data-msg warning-inputs-address-data">
+                    <span class="text-warning "></span> 
+                </div>
+            </div>
+            
+        </div>
+
+          <!-- FOMR-3: Datos de la tarjeta -->
+          <p class="text-center text-light">Card Data</p>    
+          <div class="d-flex justify-content-center">
+              <div>
+                    <!-- Tipo de tarjeta -->
+                    <div class="form" style="width: 20rem;"> 
+                        <select class="form-select bg-transparent text-secondary overflow-hidden border-0 border-bottom type-card" multiple aria-label="multiple select">
+                            <option disabled>Select Type Card</option>
+                            <option value="visa" selected>VISA</option>
+                            <option value="mc">Master Card</option>
+                            <option value="gc">Gift Card</option>
+                        </select>                
+                    </div>
+
+                    <div class="credit-card">
+                        <!-- Nombre del duexo -->
+                        <div class="form">                
+                            <input class="input card-holder-name" placeholder="Holder Name" required="" type="text">
+                            <span class="input-border"></span>               
+                        </div>
+
+                        <!-- Numero de la tarjeta -->
+                        <div class="form">                
+                            <input class="input card-number" placeholder="Card Number" required="" type="number">
+                            <span class="input-border"></span>             
+                        </div>
+
+                        <!-- Fecha de Expiracion -->
+                        <div class="form">                
+                            <input class="input card-expiration-date" placeholder="City" required="" type="date">
+                            <span class="input-border"></span>              
+                        </div>
+
+                        <!-- CCV -->
+                        <div class="form">                
+                            <input class="input card-code-ccv" placeholder="CCV" required="" type="number">
+                            <span class="input-border"></span>           
+                        </div>    
+
+                        <div class="form card-data-msg warning-inputs-card-data">
+                            <span class="text-warning "></span>
+                        </div>
+                    </div>
+
+                    <div class="gift-card d-none">
+                        <!-- Nombre del duexo -->
+                        <select class="form-select bg-transparent text-secondary overflow-hidden border-0 border-bottom type-gift-card" multiple aria-label="multiple select">
+                            <option disabled>Select Type Gift Card</option>
+                            <option value="1">Apple</option>
+                            <option value="2">Google</option>
+                        </select> 
+
+                        <!-- Numero de la tarjeta -->
+                        <div class="form">                
+                            <input class="input gift-card-number" placeholder="Gift Card Number" required="" type="number">
+                            <span class="input-border"></span>             
+                        </div>
+
+                        <!-- Fecha de Expiracion -->
+                        <div class="form">                
+                            <input class="input gift-card-holder" placeholder="Gift Card Holder Name" required="" type="text">
+                            <span class="input-border"></span>              
+                        </div>
+                        <!-- Total de Dolares de la Tarjeta -->
+                        <div class="form">                
+                            <input class="input gift-card-amount" placeholder="Gift Card Total Amount" required="" type="text">
+                            <span class="input-border"></span>              
+                        </div>
+                    </div>
+
+            </div>
+              
+          </div>
+
+        <div class="d-flex justify-content-center p-4">
+            <input class="btn common-bg-transparet text-light px-5 submit-new-card submit-update-card" type="button" value="Submit">
+            <img src="../../../dist/svg/load.svg" alt="" class="px-2 loading-submit-new-card d-none">
+        </div>
+    </div>
+    <footer>
+        <p class="text-center">
+            <small class="text-light">Tech by @Nazzareg</small>
+        </p>        
+    </footer>
+    <script src="../../../plugins/bootstrap/js/jquery.min.js"></script>
+    <script src="../../../plugins/bootstrap/js/popper.min.js"></script>
+    <script src="../../../plugins/bootstrap/js/bootstrap.min.js"></script>   
+    <script src="../../../dist/js/admin/app.js" type="module"></script>     
+    <script src="../../../dist/js/admin/create-card.js" type="module"></script>      
+        
+</body>
+</html>

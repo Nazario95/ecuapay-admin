@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ecuapay</title>
+    <style>body{ background-color: #05051f!important;}</style>
+</head>
+<body>    
+    <script>
+        chckValidSesionData() ? redirect('login') : redirect('main') 
+        //get session time 
+        function chckValidSesionData(){
+            let goToLogin = false;
+    
+            if(!localStorage.getItem('ep-active-usr')){goToLogin=true}
+            else if(!localStorage.getItem('ep-timeSesion')){goToLogin=true}
+            else if(!localStorage.getItem('ep-token')){goToLogin=true}
+    
+            return goToLogin;
+        }
+        // redirection
+        function redirect(goTo){
+            localStorage.clear();
+          goTo == 'login'? location.href="/s/login/":
+          goTo == 'main' ? location.href="/s/card/":''
+        }
+    </script>
+</body>    
+</html>
+

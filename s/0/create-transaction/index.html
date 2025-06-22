@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../dist/css/style.css">
+    <link rel="stylesheet" href="../../../dist/css/ms-css.css">
+    <link rel="stylesheet" href="../../../dist/css/form-component.css">
+    <title>egpay</title>
+</head>
+<body class="bg-color">   
+    <!-- MENU-Header -->
+    <div class="d-flex justify-content-center">
+        <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../">Cards</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Create Transaction</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="../create-card/">Create Card</a>
+            </li>
+
+          </ul>
+    </div>
+
+    <!-- Formulario -->
+    <div>
+         <!-- FOMR-1: Crear Transaccion -->
+        <p class="text-center text-light">Create Transaction</p>    
+        <div class="d-flex justify-content-center mb-5">
+            <div>
+
+                <div class="form" style="width: 20rem;">
+                    <select id="list-clients" class="form-select bg-transparent text-secondary overflow-hidden border-0 border-bottom " multiple aria-label="multiple select">
+                        <option disabled>Loading Cards...</option>
+                    </select>               
+                </div>
+
+                <!-- Selecionar tarjeta -->
+                 <div class="d-flex">
+                    <div class="form" style="width: 20rem;">           
+                        <input class="input card-number" placeholder="Card Number" required="" type="text" disabled>                    
+                        <span class="input-border"></span>                                   
+                    </div>
+                    <span class="card-type">
+                        <img src="../../../dist/svg/load.svg" alt="" class="px-2">
+                    </span> 
+                 </div>
+               
+                <!-- Nombre del dueño de la tarjeta -->
+                <div class="form" style="width: 20rem;">           
+                    <input class="input card-holder" placeholder="Holder Name" required="" type="text" disabled>
+                    <span class="input-border"></span>          
+                </div>
+                <!-- Nombre de la tienda o pagina de compra -->
+                <div class="form" style="width: 20rem;">           
+                    <input class="input form-element store-name" placeholder="Store Name or Paymend Method" required="" type="text" disabled>
+                <span class="input-border"></span>         
+                </div>
+                <!-- Estado de Trasaccion -->
+                <div class="form" style="width: 20rem;"> 
+                    <select class="form-select bg-transparent text-secondary overflow-hidden border-0 border-bottom form-element payment-status" multiple aria-label="multiple select" disabled>
+                        <option disabled>Payment Status</option>
+                        <option value="1">Completed</option>
+                        <option value="2">Rejected</option>
+                    </select>                
+                </div>
+                <!-- Total Pagado -->
+                <div class="form" style="width: 20rem;">           
+                    <input class="input form-element total-paid" placeholder="Total paid" required="" type="number" disabled>
+                    <span class="input-border"></span>        
+                </div>
+                <!-- Fecha y Hora -->
+                <div class="form" style="width: 20rem;">           
+                  <input class="input text-secondary form-element time-payment" placeholder="Date of the payment" required="" type="datetime-local" disabled>
+                  <span class="input-border"></span>        
+                </div>
+
+                <div class="mt-3">
+                    <span class="text-warning msg-error-code">
+                        
+                    </span>
+                </div>
+
+            </div>         
+        </div>
+
+        <div class="d-flex justify-content-center p-4">
+            <input class="btn common-bg-transparet text-light px-5 submit-transaction" type="button" value="Create" id="submit-transaction">
+            <img src="../../../dist/svg/load.svg" alt="" class="px-2 loading-submit-transaction d-none">
+        </div>
+    </div>
+    <footer>
+        <p class="text-center">
+            <small class="text-light">Tech by @Nazzareg</small>
+        </p>        
+    </footer>
+    <script src="../../../plugins/bootstrap/js/jquery.min.js"></script>
+    <script src="../../../plugins/bootstrap/js/popper.min.js"></script>
+    <script src="../../../plugins/bootstrap/js/bootstrap.min.js"></script>      
+    <script src="../../../dist/js/admin/create-transaction.js" type="module"></script>      
+</body>
+</html>

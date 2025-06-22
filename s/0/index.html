@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../dist/css/style.css">
+    <link rel="stylesheet" href="../../dist/css/ms-css.css">
+    <title>ecuapay</title>
+</head>
+<body class="bg-color">   
+    <div class="d-flex justify-content-center">
+        <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Cards</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./create-transaction/">Create Transaction</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="./create-card/">Create Card</a>
+            </li>
+
+          </ul>
+    </div>
+    
+    <!-- CONTAINER-ACCORDION -->
+    <div class="container">
+        <div class="accordion" id="accordion">
+
+             <!-- ITEM DE PREVISUALIZACION LOADING-->
+             <div class="accordion-item ">
+                <h2 class="accordion-header" id=xxxxx>
+                  <button class="accordion-button text-light bg-color" type="button" data-bs-toggle="collapse" data-bs-target="#xx-xxxx" aria-expanded="true" aria-controls="collapseOne">
+                      <div>
+                          TITLE:
+                          <span class="text-warning">
+                            <img src="../../dist/svg/load.svg" alt="">
+                          </span>
+                      </div>
+                  </button>
+                </h2>
+                <div id="xx-xxxx" class="accordion-collapse collapse show w-100" aria-labelledby="${idCard}" data-bs-parent="#accordionExample">
+    
+                  <div class="p-2 accordion-body w-100 ">
+                    <!-- ---------------------#1. DATOS BASICOS DE LA TARJETA 1 ---------------------- -->
+                      <div class="d-flex justify-content-around">
+                          <P class="text-light">${cardNumber}</P>
+                          <p class="text-warning">ACTIVE: <span class="text-light">
+                            <!-- 33d 22h 39m 7s -->
+                            <img src="../../dist/svg/load.svg" alt="">
+                        </span></p>
+                      </div>
+    
+                      <!-- ---------------------#2. DATOS BASICOS DE LA TARJETA 2 ---------------------- -->
+                      <div class="d-flex justify-content-center gap-5 over-scrol common-bg">
+                          <!-- type card -->
+                           <div>
+                              <small class="text-warning text-nowrap">Card Type</small>
+                              <p class="text-light text-center">
+                                  <!-- VISA  -->
+                                  <img src="../../dist/svg/load.svg" alt="">
+                              </p>
+                           </div>
+    
+                           <!-- status transaction-->
+                           <div>                            
+                              <small class="text-warning text-nowrap">Status:</small><br>
+                              <h5 class="text-light text-center">                        
+                                  <!-- OK -->
+                                  <img src="../../dist/svg/load.svg" alt="">
+                              </h5>
+                           </div>
+    
+                           <!-- total transacions -->
+                           <div>
+                              <small class="text-warning text-nowrap">Total transaction:</small><br>
+                              <p class="text-light text-center">
+                                  <!-- 2 -->
+                                  <img src="../../dist/svg/load.svg" alt="">
+                              </p>
+                           </div>
+                           
+                           <!-- total sald rest -->
+                           <div>
+                              <small class="text-warning text-nowrap">Sald Rest:</small><br>
+                              <p class="text-light">
+                                  0 XAF
+                              </p>
+                           </div>
+    
+                           <!-- total sald spended -->
+                           <div>
+                              <small class="text-warning text-nowrap">Salde Spended:</small><br>
+                              <p class="text-danger">
+                                  - 0 XAF
+                              </p> 
+                           </div>
+    
+                           <!-- total all salde -->
+                           <div>
+                              <small class="text-warning text-nowrap">Salde:</small><br>
+                              <p class="text-light">
+                                  0 XAF
+                              </p>
+                           </div>                        
+                      </div>
+    
+                      <!-- ----------------#3. HISTORIAL DE TRANSACCIONES--------------- -->
+                      <div class="overflow-auto" style="height: 320px;">
+                        <!-- ----------------transacciones 1--------------- -->
+                          <div class="card bg-color common-border my-2">  
+    
+                              <div class="card-header text-light">                                   
+                                    <span class="placeholder-wave">
+                                        Store Name:
+                                        <span class="placeholder col-2"></span>
+                                         <!-- ----nombre tienda - Estado de Pago------ -->
+                                        <!-- Shein <span class="text-success fw-bold ms-2 p-1">Completed</span> -->
+                                    </span>                                 
+                              </div>
+    
+                              <div class="card-body placeholder-wave">                                
+                                <span>Nº:</span>
+                                <span class="placeholder col-2"></span>
+                                <!-- <small> #00001</small> -->
+                                <br>
+    
+                                                             
+                                <small>Id de Transaccion: </small>
+                                <span class="placeholder col-2"></span>
+                                <!-- <span> iu877fhh7fh-iiuty9uf-009cuf</span> -->
+                                <br>
+                                
+                                <small>Total Paid: </small>
+                                <span class="placeholder col-2"></span>
+                                <!-- <span class="text-danger fw-bold">- 20.000 XAF </span> -->
+                                <br>
+                                
+                                <span>Time Transaction: </span>
+                                <span class="placeholder col-2"></span>
+                                <!-- <small>April 27, 2025 - 18:18h </small> -->
+                              </div>
+                          </div>                          
+                      </div>                    
+                  </div>
+    
+    
+                  <div class="d-flex gap-2">
+                    <!-- ------------------------#4. BOTONES DE ACCION -------------------------------- -->
+                      <button class="btn common-border w-50 text-light btn-action" data-bs-toggle="modal" data-bs-target="#EraseCard" style="font-size: .8rem;" disabled>
+                           Delete Card
+                           <img src="../../dist/svg/trash.svg" alt="">
+                      </button>
+                      <button class="btn common-border w-50 text-light btn-action" data-bs-toggle="modal" data-bs-target="#disabledEnabledCard" style="font-size: .8rem;" disabled>
+                           Disable card
+                           <img src="../../dist/svg/x.svg" alt="">
+                      </button>
+    
+                      <button class="btn common-border w-50 text-light btn-action" data-bs-toggle="modal" data-bs-target="#showCard" style="font-size: .8rem;" disabled>
+                           Card Details
+                           <img src="../../dist/svg/eye.svg" alt="">
+                      </button>
+    
+                      <button class="btn text-light common-border w-50 rounded btn-action" style="font-size: .8rem;" disabled>
+                          <a href="./transactions/" class=" text-center text-decoration-none">                        
+                              Show Transactions
+                              <img src="../../dist/svg/go-to.svg" alt="">                            
+                          </a>
+                    </button>
+                      
+                  </div>
+    
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+
+     <!-- MODAL-1:Ver tarjeta -->
+     <div class="modal fade" id="showCard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog bg-color">
+          <div class="modal-content">
+            <div class="modal-body bg-color">
+                
+                <div class="d-flex justify-content-center align-items-center">   
+
+                    <div class="visa-card">
+                        <div class="logoContainer">
+                        <svg
+                            class="mc-logo d-none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            x="0px"
+                            y="0px"
+                            width="23"
+                            height="23"
+                            viewBox="0 0 48 48"
+                            class="svgLogo"
+                        >
+                            <path
+                            fill="#ff9800"
+                            d="M32 10A14 14 0 1 0 32 38A14 14 0 1 0 32 10Z"
+                            ></path>
+                            <path
+                            fill="#d50000"
+                            d="M16 10A14 14 0 1 0 16 38A14 14 0 1 0 16 10Z"
+                            ></path>
+                            <path
+                            fill="#ff3d00"
+                            d="M18,24c0,4.755,2.376,8.95,6,11.48c3.624-2.53,6-6.725,6-11.48s-2.376-8.95-6-11.48 C20.376,15.05,18,19.245,18,24z"
+                            ></path>
+                        </svg>
+                        <p class="text-light visa-logo d-none">VISA</p>
+                        </div>
+            
+                        <!-- Nombre del Titual -->
+                        <div class="number-container ">                
+                            <label class="input-label" for="cardName">CARD HOLDER</label>
+                            <input
+                                class="inputstyle virtual-card-holder-name"
+                                id="cardName"
+                                value="NAZARIO MONEBAMA ETOHO NSAHA"
+                                name="cardName"
+                                type="text"
+                                disabled
+                            />
+                        </div>
+            
+                        <!-- Numer de la Tarjeta -->
+                        <div class="number-container">
+                        <label class="input-label" for="cardNumber">CARD NUMBER</label>
+                        <input
+                            class="inputstyle virtual-card-number"
+                            id="cardNumber"
+                            value="XXXX XXXX XXXX XXX"
+                            name="cardNumber"
+                            type="text"
+                            disabled
+                        />
+                        </div>
+                        
+                        <div class="name-date-cvv-container">
+                            <!-- Saldo -->
+                            <div class="name-wrapper">
+                                <label class="input-label" for="holderName">Salde</label>
+                                <input
+                                class="inputstyle virtual-card-salde"
+                                id="salde"
+                                value="0.0 XAF"
+                                type="text"
+                                disabled
+                                />
+                            </div>
+                            <!-- Expiration date -->
+                            <div class="expiry-wrapper">
+                                <label class="input-label" for="expiry">VALID THRU</label>
+                                <input class="inputstyle virtual-card-exp-date" id="expiry" value="MM/YY" type="text" disabled/>
+                            </div>
+                            <!-- CCV -->
+                            <div class="cvv-wrapper">
+                                <label class="input-label" for="cvv">CVV</label>
+                                <input
+                                class="inputstyle virtual-card-ccv"
+                                value="***"
+                                maxlength="3"
+                                id="cvv"
+                                type="password"
+                                disabled
+                                />
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+
+                <div class="d-flex justify-content-center py-4">
+                    <button class="btn common-bg-transparet text-light">
+                        <a href="./create-card/" class="text-decoration-none link-edit-card">
+                            Edit
+                            <img src="../../dist/svg/edit.svg" alt="">
+                        </a>                        
+                    </button>
+                </div>
+
+            </div>
+          </div>
+        </div>
+    </div>
+
+     <!-- MODAL-2:Desabilitar tarjeta -->
+     <div class="modal fade" id="disabledEnabledCard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body bg-color text-light">
+                <!-- holder nam -->
+                <p class="disable-modal-card-holder-name"></p>
+                <!-- Card number -->
+                <p class="disable-modal-card-number"></p>
+                <small class="text-warning"><span class="disable-enable text-warning">Disabler</span> This Card?</small>                
+            </div>
+            <div class="modal-footer bg-color border-0">
+              <button type="button" class="btn border border-secondary text-light" data-bs-dismiss="modal">No</button>
+              <button type="button" class="btn border border-secondary text-light confirm-disable-btn">Yes</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- MODAL-3:Borrar Card -->
+    <div class="modal fade" id="EraseCard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body bg-color text-light">
+                <!-- holder nam -->
+                <p class="delete-modal-card-holder-name">NAZARIO MONEBAMA ETOHO NSAHA</p>
+                <!-- Card number -->
+                <p class="delete-modal-number-card"></p>
+                <small class="text-warning">Delete This Card?</small>  
+            </div>
+            <div class="modal-footer bg-color border-0">
+                <button type="button" class="btn border border-secondary text-light" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn border border-secondary text-light confirm-delete-btn">Yes</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <footer>
+        <p class="text-center">
+            <small class="text-light">Tech by @Nazzareg</small>
+        </p>        
+    </footer>
+    <script src="../../plugins/bootstrap/js/jquery.min.js"></script>
+    <script src="../../plugins/bootstrap/js/popper.min.js"></script>
+    <script src="../../plugins/bootstrap/js/bootstrap.min.js"></script>      
+    <script src="../../dist/js/admin/app.js" type="module"></script>      
+    <script src="../../dist/js/admin/card.js" type="module"></script>      
+</body>
+</html>

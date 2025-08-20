@@ -1,9 +1,12 @@
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+import {getAuth } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js"
 // import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
 
 import {setDoc, getFirestore,collection,getDocs, addDoc,updateDoc, doc, getDoc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
+import {createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
+
 // import {getStorage, ref, getDownloadURL,uploadBytes, deleteObject} from "https://www.gstatic.com/firebasejs/11.7.3/firebase-storage.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,6 +25,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
 // const analytics = getAnalytics(app);
 
 //=============>crud auth
@@ -96,6 +101,17 @@ export const app = initializeApp(firebaseConfig);
     //     } 
     //     catch (error) {return error;}
     // }
+
+    //******************Crear Nuevo Usuario */
+    export async function createNewUsr(email,password) {
+        createUserWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+                return userCredential
+			})
+			.catch((error) => {
+                return error
+		});
+    }
     
 
 //=================>CRUD FIRESTORE

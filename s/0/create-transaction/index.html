@@ -34,11 +34,16 @@
         <div class="d-flex justify-content-center mb-5">
             <div>
 
-                <div class="form" style="width: 20rem;">
-                    <select id="list-clients" class="form-select bg-transparent text-secondary overflow-hidden border-0 border-bottom " multiple aria-label="multiple select">
+                <div class="form selec-list-client d-flex" style="width: 20rem;">
+                    <select id="list-clients" class="form-select bg-transparent text-secondary overflow-hidden border-0 border-bottom" multiple aria-label="multiple select">
                         <option disabled>Loading Cards...</option>
-                    </select>               
+                    </select>  
+
+                    <button class="text-light bg-transparent border rounded-2 ms-2 movil-search-btn d-none">
+                        Seach
+                    </button>                              
                 </div>
+               
 
                 <!-- Selecionar tarjeta -->
                  <div class="d-flex">
@@ -59,7 +64,7 @@
                 <!-- Nombre de la tienda o pagina de compra -->
                 <div class="form" style="width: 20rem;">           
                     <input class="input form-element store-name" placeholder="Store Name or Paymend Method" required="" type="text" disabled>
-                <span class="input-border"></span>         
+                    <span class="input-border"></span>         
                 </div>
                 <!-- Estado de Trasaccion -->
                 <div class="form" style="width: 20rem;"> 
@@ -67,8 +72,21 @@
                         <option disabled>Payment Status</option>
                         <option value="1">Completed</option>
                         <option value="2">Rejected</option>
+                        <option value="3">Pending</option>
                     </select>                
                 </div>
+
+                <!-- Motivo de error, demora -->
+                <div class="form" style="width: 20rem;"> 
+                    <select class="form-select bg-transparent text-secondary overflow-hidden border-0 border-bottom form-element motive-status">
+                        <option value="0" disabled selected>Only for Delay or Error Transations</option>
+                        <option>El Pago esta siendo procesado</option>
+                        <option>Error: Saldo insuficiente</option>
+                        <option>Error: Esta plataforma, no admite esta tarjeta</option>
+                        <option>Error: Error desconocido, intentelo nuevamente</option>
+                    </select>                
+                </div>
+
                 <!-- Total Pagado -->
                 <div class="form" style="width: 20rem;">           
                     <input class="input form-element total-paid" placeholder="Total paid" required="" type="number" disabled>

@@ -153,13 +153,28 @@
                         <div class="form">                
                             <input class="input card-code-ccv" placeholder="CCV" required="" type="number">
                             <span class="input-border"></span>           
-                        </div>    
+                        </div> 
+                        
+                        <!-- Salde -->
+                        <div class="form">                
+                            <input class="input card-salde" placeholder="Salde" required="" type="number">
+                            <span class="input-border"></span>           
+                        </div>
+
+                        <!-- Tiempo de Activacion de la tarjeta -->
+                        <div class="form">                
+                            <input class="input card-active-days" placeholder="Active Time: Days" required="" type="number" value="00">
+                            <input class="input card-active-hours" placeholder="Active Time: Hours" required="" type="number" value="00">
+                            <input class="input card-active-minutes" placeholder="Active Time: Minutes" required="" type="number" value="00">
+                            <span class="input-border"></span>           
+                        </div>
 
                         <div class="form card-data-msg warning-inputs-card-data">
                             <span class="text-warning "></span>
                         </div>
                     </div>
 
+                    <!-- PROXIMAMENTE: Solo para gift-card -->
                     <div class="gift-card d-none">
                         <!-- Nombre del duexo -->
                         <select class="form-select bg-transparent text-secondary overflow-hidden border-0 border-bottom type-gift-card" multiple aria-label="multiple select">
@@ -193,6 +208,9 @@
         <div class="d-flex justify-content-center p-4">
             <input class="btn common-bg-transparet text-light px-5 submit-new-card submit-update-card" type="button" value="Submit">
             <img src="../../../dist/svg/load.svg" alt="" class="px-2 loading-submit-new-card d-none">
+        </div>
+         <div class="d-flex justify-content-center p-4 rebooting d-none">
+            <small class="text-warning">Rebooting page in ... <span class="reboot-counter text-warning"></span></small>
         </div>
     </div>
     <footer>

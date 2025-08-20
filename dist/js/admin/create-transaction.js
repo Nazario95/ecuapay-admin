@@ -14,12 +14,19 @@ let trxIdUpdate;//Id de transaccion para actualizacion
 let constDataUptTrx = []
 
 await getNumbTrx()
-console.log(currentTrxNumb)
+// console.log(currentTrxNumb)
 getCards();
 
 async function getCards() {
     let cards = await coleccionDatos('cards');
     cards.size > 0 ? createSelecListClient(cards):'';
+}
+//1. Definir tipo de dispositivo ================================
+if(chkTypeDevice() == 'movil'){
+    document.querySelector('#list-clients').removeAttribute('multiple');
+    document.querySelector('.payment-status').removeAttribute('multiple');
+    //Habilitar btn de busqueda
+    document.querySelector('.movil-search-btn').classList.remove('d-none');
 }
 
 // Crear los Select de los clientes
@@ -50,18 +57,50 @@ function createSelecListClient(cards){
 }
 
 function enableClicEventForClientList(){
+    let counter = 0;
     clients = document.querySelectorAll('.clients')
-    clients.forEach(client=>{
-        client.addEventListener('click',(e)=>{                                    
-            rellarFormularioPorClick(e);
-        })
+    clients.forEach(client=>{       
+            counter++
+            if(chkTypeDevice()=='movil' || chkTypeDevice()=='tablet'){
+                document.querySelector('.movil-search-btn').addEventListener('click',()=>{
+                    completeCardDataMovil();
+                });           
+            }
+            else{
+                client.addEventListener('click',(e)=>{ 
+                    // alert(client)
+                    // alert('hizo un cambio')                                   
+                    rellarFormularioPorClick(e);
+                })
+            }
+        
+       
     })
+
+    function completeCardDataMovil(){
+        // console.log(document.querySelector('#list-clients').options.length)
+        let selectedOtion = document.querySelector('#list-clients').options;
+        let totalOptions = document.querySelector('#list-clients').options.length;
+        let idSelectedElement;
+        for(let i=0;  i< totalOptions;i++){
+            // console.log(selectedOtion[i].selected+'->'+selectedOtion[i].id)
+            if(selectedOtion[i].selected){
+                idSelectedElement = selectedOtion[i].id;
+                rellarFormularioPorClick(idSelectedElement,'movil')
+            }
+        }
+        // console.log(document.querySelector('#list-clients').options[1].selected)
+    }
 }
 
-function rellarFormularioPorClick(clikedElement){
+function rellarFormularioPorClick(clikedElement,device){
     //1. id elemento cliqueado:
-    idCard = clikedElement.target.id;
-
+    if(device == 'movil' || device == 'tablet'){
+        idCard = clikedElement;
+    }
+    else{
+        idCard = clikedElement.target.id;
+    }
     let {cardNumber,cardHolderName,cardType} = JSON.parse(localStorage.getItem(idCard));
     //2. Inyectar valores en los elementos del formulario
     document.querySelector('.card-number').value = cardNumber;
@@ -80,10 +119,11 @@ document.getElementById('submit-transaction').addEventListener('click',()=>{
         numbTx:updateTrx?constDataUptTrx[1]:currentTrxNumb,
         storeName:document.querySelector('.store-name').value,
         statusPayment:document.querySelector('.payment-status').value,
+        motivPayment:document.querySelector('.motive-status').value,
         totalPaid:document.querySelector('.total-paid').value,
         timeTransaction:document.querySelector('.time-payment').value
     }
-    // console.log(dataTransaction);
+    console.log(dataTransaction);
 
     // 2. Verificaciones
     Object.values(dataTransaction).forEach(chkData=>{
@@ -98,18 +138,28 @@ document.getElementById('submit-transaction').addEventListener('click',()=>{
 
 //Guardar transaccion
 async function submitTransaction(){
-    console.log(dataTransaction)
-    
+    // console.log(dataTransaction)
+    //Actualizar transaccion
     if(updateTrx){
-        console.log('Actualizando')
-        let resUpdteTx = await actualizar('transactions-history',trxIdUpdate,dataTransaction);
-        resUpdteTx?console.log("Error al Subir los Datos"):eraseLocalData();
+        try {
+            // console.log('Actualizando')
+            let resUpdteTx = await actualizar('transactions-history',trxIdUpdate,dataTransaction);
+            console.log(resUpdteTx)
+            resUpdteTx ?console.log("Error al Subir los Datos"):eraseLocalData();
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
-
+    // Crear Nueva Transaccion
     else if(updateTrx == false){
-        let resSubmitTx = await guardarColeccion('transactions-history',dataTransaction)
-        // console.log(resSubmitTx);
-        resSubmitTx?console.log("Error al Subir los Datos"):eraseLocalData();
+        try {
+            let resSubmitTx = await guardarColeccion('transactions-history',dataTransaction)
+            console.log(resSubmitTx);
+            resSubmitTx?eraseLocalData():console.log("Error al Subir los Datos");
+        } catch (error) {
+            console.log(error)
+        }        
     }
     
     function eraseLocalData(){
@@ -117,7 +167,7 @@ async function submitTransaction(){
         savedIdCardsToLocal.forEach(remCardData=>{
             localStorage.removeItem(remCardData)
         });        
-        location.href='../';
+        location.href=`../transactions/?id_card=${idCard}`;
     }  
 }
  
@@ -154,14 +204,14 @@ async function getNumbTrx(){
     let trxNumbOrdenado;    
 
     let resAllTrx = await coleccionDatos('transactions-history');
-    console.log(resAllTrx.empty)
+    // console.log(resAllTrx.empty)
     if(resAllTrx.empty){
         currentTrxNumb = 1;
     }
 
     else{
         resAllTrx.forEach(resTrx=>{
-            console.log(resTrx.data())
+            // console.log(resTrx.data())
             let {idTX,numbTx} = resTrx.data()
             trx.push({idTX:idTX,numbTx:numbTx});
             trxNumbs.push(Number(numbTx));        
@@ -220,3 +270,24 @@ async function getTrxData(trxId) {
 
     });
 }
+
+function chkTypeDevice() {
+    const userAgent = navigator.userAgent;
+    let device;
+    // Expresiones regulares para detectar dispositivos
+    const esMovil = /Mobi|Android|iPhone|iPad|iPod/i.test(userAgent);
+    const esTablet = /iPad|Android(?!.*Mobi)/i.test(userAgent);
+    const esOrdenador = !esMovil && !esTablet;
+
+    if (esMovil) {
+       device = 'movil'
+    } else if (esTablet) {
+        device = 'tablet'
+    } else if (esOrdenador) {
+        device = 'pc'
+    } else {
+        device = 'unknow'
+    }
+    return device;
+}
+

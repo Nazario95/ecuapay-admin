@@ -6,7 +6,7 @@ let loadComplete = false;
 //1.Iniciar Carga de las Tarjetas
 async function loadCards(){
     //1. Verificar el total de Cartas
-    let getCards = await coleccionDatos('cards')
+    let getCards = await coleccionDatos('cards');
     // console.log(res.data())
     //2. Inyectar Contenedores Segun el numero de cartas
     getCards.size > 0 ? insertCardContainers(getCards) : '';
@@ -28,9 +28,12 @@ function insertCardContainers(getCards){
     });   
     document.querySelector('#accordion').innerHTML = accordion;
 
+    // Inicializar tooltips
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
     transacionsCreator(idCards);
 }
-
 
 //3. Crear Items Accordions
 function cardItemCreator(idCard,cardData,){
@@ -103,7 +106,7 @@ function cardItemCreator(idCard,cardData,){
                            <div>
                               <small class="text-warning text-nowrap">Salde:</small><br>
                               <p class="text-light text-center">                                  
-                                    ${totalSalde} XAF
+                                    ${totalSalde} $
                               </p>
                            </div>                        
                       </div>
@@ -138,8 +141,7 @@ function cardItemCreator(idCard,cardData,){
                         </a>
                     </button>
                       
-                </div>
-            
+                </div>            
         `
     }
 
@@ -149,19 +151,28 @@ function cardItemCreator(idCard,cardData,){
                   <button class="accordion-button text-light bg-color" type="button" data-bs-toggle="collapse" data-bs-target="#collapseId-${idCard}" aria-expanded="true" aria-controls="collapseOne">
                       <div>
                           TITLE:
+
                           <span class=" ${enabled == false && status == false ? 'text-decoration-line-through text-secondary':''} ${enabled == true && status == false?'text-secondary':''} ${enabled && status?'text-warning':''}">
-                              ${cardHolderName} ${enabled == false && status == false?'(CARD DELETED)':''} ${enabled == true && status == false?'(CARD DISABLED)':''}
+                            ${cardHolderName} 
+                            ${enabled == false && status == false?'(CARD DELETED)':''} 
+                            ${enabled == true && status == false?'(CARD DISABLED)':''}                            
                           </span>
+
+                          <i type="button" class="btn btn-tranparent"
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-custom-class="custom-tooltip"
+                            data-bs-title="This top tooltip is themed via CSS variables.">
+                                <img src="../../dist/svg/notification-danger.svg">
+                            </i>
                       </div>
                   </button>
                 </h2>
 
-                <div id="collapseId-${idCard}" class="accordion-collapse collapse show w-100" aria-labelledby="${idCard}" data-bs-parent="#accordionExample">
+                <div id="collapseId-${idCard}" class="accordion-collapse collapse w-100" aria-labelledby="${idCard}" data-bs-parent="#accordionExample">
                     ${item2}
                 </div>  
         </div> 
     `;
-
     return item;
 }   
 
@@ -189,7 +200,7 @@ function createElementTx(Txs,virtuadCardId){
                         <div class="card-header text-light">                                   
                             <span class="placeholder-wave">
                                 Store Name:
-                                ${storeName} <span class="text-${statusPayment==1?'success':'danger'} fw-bold ms-2 p-1">${statusPayment==1?'Completed':'Rejected'}</span>
+                                ${storeName} <span class="text-${statusPayment==1?'success':statusPayment==2?'danger':'warning'} fw-bold ms-2 p-1">${statusPayment==1?'Completed':statusPayment==2?'Rejected':'Pending'}</span>
                             </span>                                 
                         </div>
 
@@ -203,7 +214,7 @@ function createElementTx(Txs,virtuadCardId){
                         <br>
 
                         <small>Total Paid: </small>
-                        <span class="text-danger fw-bold">- ${totalPaid} XAF </span>
+                        <span class="text-danger fw-bold">- ${totalPaid} $ </span>
                         <br>
 
                         <span>Time Transaction: </span>
@@ -324,9 +335,8 @@ function showCardDetails(idCard){
     if(cardType == 'visa'){
         //ocultar MC
         logoMc.classList[1] == undefined ?logoMc.classList.add('d-none'):'';
-        logoMc.classList[1] == 'd-none'?'':         
-
-         //mostrar Visa
+        logoMc.classList[1] == 'd-none'?'':       
+        //mostrar Visa
         //  console.log(`logo Visa --> ${logoVisa.classList[2]}`)
          logoVisa.classList[2] == undefined ?'':'';
          logoVisa.classList[2] == 'd-none'? logoVisa.classList.remove('d-none'):''
@@ -335,12 +345,11 @@ function showCardDetails(idCard){
 
     document.querySelector('.virtual-card-holder-name').setAttribute('value',`${cardHolderName}`);
     document.querySelector('.virtual-card-number').setAttribute('value',`${cardNumber}`);
-    document.querySelector('.virtual-card-salde').setAttribute('value',`${totalSalde}.0 F.CFA`);
+    document.querySelector('.virtual-card-salde').setAttribute('value',`${totalSalde}.0 $`);
     document.querySelector('.virtual-card-exp-date').setAttribute('value',`${cardExpDate}`);
     document.querySelector('.virtual-card-ccv').setAttribute('value',`${cardCcv}`);
     document.querySelector('.virtual-card-ccv').setAttribute('type','text');
 
     //Actualizar btn de Create Card
-    document.querySelector('.link-edit-card').setAttribute('href',`./create-card/?id_card=${idCard}`);
-   
+    document.querySelector('.link-edit-card').setAttribute('href',`./create-card/?id_card=${idCard}`);   
 }

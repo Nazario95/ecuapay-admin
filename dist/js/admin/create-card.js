@@ -1,5 +1,5 @@
 import { activeLoadEfx } from "./app.js";
-import { guardarColeccion, consulta, obtenerDoc, actualizar} from "../fbmanifeswebpack.js";
+import { guardarColeccion, consulta, obtenerDoc, actualizar, createNewUsr} from "../fbmanifeswebpack.js";
 
 //Client Personal Data
 let personalData;
@@ -71,8 +71,8 @@ function captureInputs(){
         cardType: document.querySelector('.type-card').value,
         status:true,
         totalTransactions:0,
-        totalSalde:0,
-        activeTime:'00d 00h 00m 00s',
+        totalSalde:document.querySelector('.card-salde').value,
+        activeTime:`${document.querySelector('.card-active-days').value}d ${document.querySelector('.card-active-hours').value}h ${document.querySelector('.card-active-minutes').value}m 00s`,
         enabled:true        
     }
 }
@@ -267,7 +267,7 @@ async function checkDbData(){
     errorData == 0 ? checkLevel = 7 :'';
 }
 
-//5.Guardar
+//5.Guardar nueva tarjeta
 async function saveNewCard(){
     activeLoadEfx('submit-new-card', 0);
     // console.log('Guardando...')
@@ -286,13 +286,47 @@ async function saveNewCard(){
         res = await guardarColeccion('cards',cardData)
         // console.log('res2-------->')
         // console.log(res)
-        location.href = '../'
+        //Iniciar Creacion de nuevo usuario
+        createNewCard ? createNewUser():'';        
     }else{
         checkLevel = 8 ; existError = true;
     }  
 }
 
+//6. Crear el usuario
+function createNewUser(){
+     let {email} = personalData;
+    //Aceptar la creacion usuario
+    if(confirm(`Do you want to create the user ${email}?`)){
+        let pswNewUser = prompt('Set the password for the new user');
+        confirm(`Create User with email: ${email}, and password: ${pswNewUser} ?`)? initCreartionNewUser(email,pswNewUser):''        
+    }
+}
+async function initCreartionNewUser(email,psw){
+    try {
+        let res = await createNewUsr(email,psw);
+        if(res == undefined){
+            console.log(res)
+            alert('The New User, has been created succefull');
+            
+            document.querySelector('.rebooting').classList.remove('d-none');
+            let rebootCounter = document.querySelector('.reboot-counter');
+            let i=5
+            setInterval(()=>{
+                rebootCounter.textContent = i
+                i--
+                if(i<0){
+                   location.href = '../'
+                }
+            },1000)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+        
+}
 // --------------------FUNCIONES DE USO COMUN------------------
+// confirm('Crear Cuenta?')? initCreartionNewUser('nazza666@gmail.com','MSInazz22'):''
 
 //Imprimir mensaje en navegador
 function notification(msg,error){ 
@@ -407,11 +441,16 @@ async function loadCardData(idCard){
     activeLoadEfx('submit-new-card', 0);
     // console.log(idCard)
     let localCardData = JSON.parse(localStorage.getItem(idCard));
+    console.log(parseInt(localCardData.activeTime.split(" ")[0].split("")[0]))
     document.querySelector('.type-card').value = localCardData.cardType;
     document.querySelector('.card-holder-name').value = localCardData.cardHolderName;
     document.querySelector('.card-number').value = localCardData.cardNumber.replace(/\D/g, '');;
     document.querySelector('.card-expiration-date').value = `20${localCardData.cardExpDate.split("/")[1]}-${localCardData.cardExpDate.split("/")[0]}-01`
     document.querySelector('.card-code-ccv').value = localCardData.cardCcv;
+    document.querySelector('.card-salde').value = localCardData.totalSalde;
+    document.querySelector('.card-active-days').value = localCardData.activeTime.split(" ")[0].split("")[0]+localCardData.activeTime.split(" ")[0].split("")[1];
+    document.querySelector('.card-active-hours').value = localCardData.activeTime.split(" ")[1].split("")[0]+localCardData.activeTime.split(" ")[1].split("")[1];
+    document.querySelector('.card-active-minutes').value = localCardData.activeTime.split(" ")[2].split("")[0]+localCardData.activeTime.split(" ")[2].split("")[1];
 
     client_idl = localCardData.clientId
     console.log(client_idl);
@@ -470,3 +509,5 @@ async function saveUpdateData() {
         location.href = '../';
     }
 }
+
+            

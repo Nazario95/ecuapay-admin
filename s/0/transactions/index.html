@@ -35,6 +35,9 @@
     </div>  
 
      <div class="my-4">
+        <div id="ena-r-options">
+
+        </div>
         <p class="text-center text-light card-holder-name"></p>
     
         <div class="d-flex justify-content-around">
@@ -129,6 +132,77 @@
                 </button>
               </a>
             </div>
+          </div>
+        </div>
+    </div>
+
+     <!-- MODAL-Borrar transaccion -->
+     <!-- <div class="modal fade" id="eraseTransation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-body bg-color text-light">                
+                <div class="card-header text-light store-name">
+                    
+                </div>
+                <div class="card-body">
+                    <small>Nº: #0000</small><br>
+                    <small>Total Paid</small>
+                    <p class="text-danger fw-bold"></p>
+                    <span></span>
+                </div>
+
+            </div>
+
+          </div>
+        </div>
+    </div> -->
+
+    <!-- #MODAL - Logs de estado de ejecucion de herramientas de admin -->
+     <div class="modal fade" id="logsAdminTools" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="adminToolsLogsStatus" aria-hidden="true">
+        <div class="modal-dialog">
+
+          <div class="modal-content">
+
+            <div class="modal-body bg-color text-light">  
+                <!-- option 1 - put uid to all trx -->  
+               <div class="d-block msg-opt-1 d-none ">
+                  <small class="modal-title text-light" id="adminToolsLogsStatus">
+                    Total TRX To Meke UID: 
+                    <span class="total-txt-up-uid text-danger fw-bold">0</span>
+                    <small class="trx-id">
+                    </small>
+                    <img class="load-status" src="../../../dist/svg/load.svg" alt="">
+                  </small>
+               </div>  
+
+                <!-- option 2 - put uid to card -->  
+               <div class="d-block msg-opt-2 d-none">
+                  <small class="modal-title text-light" id="adminToolsLogsStatus-2">
+                    SETING UID DATA TO CARD...  
+                    <img class="load-status-2" src="../../../dist/svg/load.svg" alt="">
+                  </small>
+               </div> 
+
+               <!-- ####final option - action complete -->
+                <div class="d-block">
+                    <small class="text-light action-complete">
+                    Finising, Please Wait... 
+                    <img class="finish-status" src="../../../dist/svg/load.svg" alt="">
+                  </small>
+                </div>
+
+                <!-- #####COMPLETADO -->
+                <div class="d-block">
+                  <small class="text-success devtool-action-success"></small>
+                </div>
+
+                <!-- ####NO COMPLETADO -->
+                <div class="d-block">
+                  <small class="text-success devtool-action-error"></small>
+                </div>
+            </div>
+
           </div>
         </div>
     </div>
